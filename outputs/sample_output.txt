@@ -1,0 +1,60 @@
+
+========================================================================
+Recommendations for Amit Sharma  (user_id=user_001)
+COLD START (no purchase history)
+========================================================================
+1. Insulated Steel Water Bottle ($22.99) [Outdoor]
+   -> Recommended (77.3% match): matches your preferred category 'Outdoor'; shares your interests: eco-friendly, outdoor, sustainable; fits within your $100 budget.
+2. EcoTrail Hiking Backpack 45L ($89.99) [Outdoor]
+   -> Recommended (70.7% match): matches your preferred category 'Outdoor'; shares your interests: eco-friendly, outdoor, sustainable; fits within your $100 budget.
+3. Solar Power Bank 20000mAh ($39.99) [Electronics]
+   -> Recommended (64.7% match): matches your preferred category 'Electronics'; shares your interests: eco-friendly, outdoor; fits within your $100 budget.
+4. Merino Wool Hiking Socks (3-pack) ($24.99) [Outdoor]
+   -> Recommended (57.8% match): matches your preferred category 'Outdoor'; shares your interests: outdoor; fits within your $100 budget.
+5. Wireless Ergonomic Mouse ($29.99) [Electronics]
+   -> Recommended (40.4% match): matches your preferred category 'Electronics'; fits within your $100 budget.
+
+========================================================================
+Recommendations for Priya Verma  (user_id=user_002)
+Purchase history: p007, p008
+========================================================================
+1. Vegan Protein Powder ($34.99) [Fitness]
+   -> Recommended (66.6% match): matches your preferred category 'Fitness'; shares your interests: fitness, health; fits within your $200 budget.
+2. Bamboo Yoga Mat ($45.00) [Fitness]
+   -> Recommended (62.9% match): matches your preferred category 'Fitness'; shares your interests: fitness; fits within your $200 budget.
+3. Smart Fitness Watch ($149.99) [Electronics]
+   -> Recommended (32.1% match): shares your interests: fitness, health; fits within your $200 budget.
+4. Insulated Steel Water Bottle ($22.99) [Outdoor]
+   -> Recommended (15.3% match): fits within your $200 budget.
+5. Merino Wool Hiking Socks (3-pack) ($24.99) [Outdoor]
+   -> Recommended (14.6% match): fits within your $200 budget.
+
+========================================================================
+Recommendations for Rahul Mehta  (user_id=user_003)
+Purchase history: p012
+========================================================================
+1. Wireless Ergonomic Mouse ($29.99) [Electronics]
+   -> Recommended (71.5% match): matches your preferred category 'Electronics'; shares your interests: electronics, tech; fits within your $250 budget.
+2. Wireless Noise-Cancelling Headphones ($199.99) [Electronics]
+   -> Recommended (67.0% match): matches your preferred category 'Electronics'; shares your interests: electronics, tech; fits within your $250 budget.
+3. 4K Action Camera ($159.99) [Electronics]
+   -> Recommended (64.2% match): matches your preferred category 'Electronics'; shares your interests: electronics, tech; fits within your $250 budget.
+4. Smart Fitness Watch ($149.99) [Electronics]
+   -> Recommended (63.5% match): matches your preferred category 'Electronics'; shares your interests: gadget, tech; fits within your $250 budget.
+5. Solar Power Bank 20000mAh ($39.99) [Electronics]
+   -> Recommended (47.0% match): matches your preferred category 'Electronics'; shares your interests: gadget; fits within your $250 budget.
+
+========================================================================
+Recommendations for Sneha Iyer  (user_id=user_004)
+COLD START (no purchase history)
+========================================================================
+1. Minimalist Leather-Free Sneakers ($69.99) [Fashion]
+   -> Recommended (72.7% match): matches your preferred category 'Fashion'; shares your interests: sustainable, vegan; fits within your $80 budget.
+2. Natural Skincare Gift Set ($49.99) [Beauty]
+   -> Recommended (60.9% match): matches your preferred category 'Beauty'; shares your interests: cruelty-free, vegan; fits within your $80 budget.
+3. Vegan Leather Wallet ($29.99) [Fashion]
+   -> Recommended (47.9% match): matches your preferred category 'Fashion'; shares your interests: vegan; fits within your $80 budget.
+4. Bamboo Yoga Mat ($45.00) [Fitness]
+   -> Recommended (21.7% match): shares your interests: sustainable, vegan; fits within your $80 budget.
+5. Vegan Protein Powder ($34.99) [Fitness]
+   -> Recommended (17.4% match): shares your interests: vegan; fits within your $80 budget.

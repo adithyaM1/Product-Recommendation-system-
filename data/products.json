@@ -1,0 +1,200 @@
+[
+  {
+    "id": "p001",
+    "name": "EcoTrail Hiking Backpack 45L",
+    "category": "Outdoor",
+    "brand": "TrailBlaze",
+    "price": 89.99,
+    "tags": ["eco-friendly", "hiking", "outdoor", "backpack", "sustainable", "water-resistant"],
+    "description": "A 45-liter hiking backpack made from recycled materials, ideal for multi-day treks and eco-conscious adventurers."
+  },
+  {
+    "id": "p002",
+    "name": "Solar Power Bank 20000mAh",
+    "category": "Electronics",
+    "brand": "SunCharge",
+    "price": 39.99,
+    "tags": ["eco-friendly", "solar", "portable", "charging", "outdoor", "gadget"],
+    "description": "A solar-powered portable charger perfect for camping trips and outdoor adventures, keeps devices charged sustainably."
+  },
+  {
+    "id": "p003",
+    "name": "Bamboo Yoga Mat",
+    "category": "Fitness",
+    "brand": "ZenFlex",
+    "price": 45.00,
+    "tags": ["eco-friendly", "yoga", "fitness", "sustainable", "non-slip", "vegan"],
+    "description": "An eco-friendly yoga mat made from natural bamboo fiber, offering excellent grip for your practice."
+  },
+  {
+    "id": "p004",
+    "name": "Vegan Leather Wallet",
+    "category": "Fashion",
+    "brand": "UrbanStyle",
+    "price": 29.99,
+    "tags": ["vegan", "eco-friendly", "wallet", "accessories", "no-leather"],
+    "description": "A stylish wallet crafted from vegan leather, cruelty-free and durable for everyday use."
+  },
+  {
+    "id": "p005",
+    "name": "Wireless Noise-Cancelling Headphones",
+    "category": "Electronics",
+    "brand": "SoundWave",
+    "price": 199.99,
+    "tags": ["electronics", "audio", "wireless", "noise-cancelling", "tech", "premium"],
+    "description": "Premium over-ear headphones with active noise cancellation and 30-hour battery life."
+  },
+  {
+    "id": "p006",
+    "name": "Smart Fitness Watch",
+    "category": "Electronics",
+    "brand": "PulseTech",
+    "price": 149.99,
+    "tags": ["fitness", "tech", "wearable", "health", "tracking", "gadget"],
+    "description": "A smartwatch that tracks heart rate, sleep, and workouts, syncing seamlessly with your phone."
+  },
+  {
+    "id": "p007",
+    "name": "Trail Runner Running Shoes",
+    "category": "Fitness",
+    "brand": "StrideFast",
+    "price": 79.99,
+    "tags": ["fitness", "running", "shoes", "outdoor", "sports"],
+    "description": "Lightweight trail running shoes with responsive cushioning built for rugged terrain."
+  },
+  {
+    "id": "p008",
+    "name": "Resistance Bands Set",
+    "category": "Fitness",
+    "brand": "FlexCore",
+    "price": 19.99,
+    "tags": ["fitness", "home-workout", "budget", "strength", "portable"],
+    "description": "A set of five resistance bands for strength training anywhere, from home to travel."
+  },
+  {
+    "id": "p009",
+    "name": "Cast Iron Skillet",
+    "category": "Home & Kitchen",
+    "brand": "HearthCraft",
+    "price": 34.99,
+    "tags": ["kitchen", "cooking", "durable", "home", "budget"],
+    "description": "A pre-seasoned cast iron skillet that delivers even heat for years of home cooking."
+  },
+  {
+    "id": "p010",
+    "name": "Ceramic Non-Stick Cookware Set",
+    "category": "Home & Kitchen",
+    "brand": "HearthCraft",
+    "price": 129.99,
+    "tags": ["kitchen", "cooking", "eco-friendly", "non-toxic", "home"],
+    "description": "A 10-piece ceramic-coated cookware set free of PFOA, offering a healthier non-stick cooking surface."
+  },
+  {
+    "id": "p011",
+    "name": "Organic Cotton Bedsheet Set",
+    "category": "Home & Kitchen",
+    "brand": "PureSleep",
+    "price": 59.99,
+    "tags": ["eco-friendly", "organic", "home", "bedding", "sustainable"],
+    "description": "Soft organic cotton bedsheets grown without pesticides, gentle on skin and the planet."
+  },
+  {
+    "id": "p012",
+    "name": "Mechanical Keyboard RGB",
+    "category": "Electronics",
+    "brand": "KeyForge",
+    "price": 89.99,
+    "tags": ["electronics", "gaming", "tech", "keyboard", "gadget"],
+    "description": "A tactile mechanical keyboard with customizable RGB lighting, built for gamers and typists alike."
+  },
+  {
+    "id": "p013",
+    "name": "4K Action Camera",
+    "category": "Electronics",
+    "brand": "ClearShot",
+    "price": 159.99,
+    "tags": ["electronics", "outdoor", "camera", "adventure", "tech", "waterproof"],
+    "description": "A rugged waterproof action camera that captures 4K footage for your outdoor adventures."
+  },
+  {
+    "id": "p014",
+    "name": "Merino Wool Hiking Socks (3-pack)",
+    "category": "Outdoor",
+    "brand": "TrailBlaze",
+    "price": 24.99,
+    "tags": ["outdoor", "hiking", "wool", "comfort", "budget"],
+    "description": "Moisture-wicking merino wool socks designed for long hikes and all-day comfort."
+  },
+  {
+    "id": "p015",
+    "name": "Camping Tent 2-Person",
+    "category": "Outdoor",
+    "brand": "TrailBlaze",
+    "price": 119.99,
+    "tags": ["outdoor", "camping", "hiking", "water-resistant", "adventure"],
+    "description": "A lightweight 2-person tent that sets up in minutes, built to withstand wind and rain."
+  },
+  {
+    "id": "p016",
+    "name": "Vegan Protein Powder",
+    "category": "Fitness",
+    "brand": "PlantFuel",
+    "price": 34.99,
+    "tags": ["vegan", "fitness", "nutrition", "plant-based", "health"],
+    "description": "A plant-based protein powder made from pea and rice protein, ideal for vegan athletes."
+  },
+  {
+    "id": "p017",
+    "name": "Natural Skincare Gift Set",
+    "category": "Beauty",
+    "brand": "PureGlow",
+    "price": 49.99,
+    "tags": ["beauty", "vegan", "natural", "skincare", "cruelty-free", "gift"],
+    "description": "A curated skincare set made with natural, cruelty-free ingredients for glowing skin."
+  },
+  {
+    "id": "p018",
+    "name": "Minimalist Leather-Free Sneakers",
+    "category": "Fashion",
+    "brand": "UrbanStyle",
+    "price": 69.99,
+    "tags": ["vegan", "fashion", "shoes", "no-leather", "sustainable"],
+    "description": "Sleek sneakers crafted from sustainable vegan materials, combining style and ethics."
+  },
+  {
+    "id": "p019",
+    "name": "Bestselling Sci-Fi Novel Bundle",
+    "category": "Books",
+    "brand": "PageTurner",
+    "price": 24.99,
+    "tags": ["books", "reading", "fiction", "sci-fi", "budget"],
+    "description": "A three-book bundle of award-winning science fiction novels for avid readers."
+  },
+  {
+    "id": "p020",
+    "name": "Standing Desk Converter",
+    "category": "Office",
+    "brand": "WorkWell",
+    "price": 149.99,
+    "tags": ["office", "home-office", "ergonomic", "health", "tech"],
+    "description": "An adjustable standing desk converter that promotes better posture during work hours."
+  },
+  {
+    "id": "p021",
+    "name": "Wireless Ergonomic Mouse",
+    "category": "Electronics",
+    "brand": "KeyForge",
+    "price": 29.99,
+    "tags": ["electronics", "office", "ergonomic", "tech", "budget"],
+    "description": "A wireless mouse designed to reduce wrist strain during long work sessions."
+  },
+  {
+    "id": "p022",
+    "name": "Insulated Steel Water Bottle",
+    "category": "Outdoor",
+    "brand": "TrailBlaze",
+    "price": 22.99,
+    "tags": ["eco-friendly", "outdoor", "hydration", "sustainable", "budget"],
+    "description": "A double-walled steel water bottle that keeps drinks cold for 24 hours, reducing single-use plastic."
+  }
+]

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Recommendation Agent</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f1fbf4;
+      --surface: #ffffff;
+      --surface-strong: #e8f7e8;
+      --text: #163a1d;
+      --text-muted: #4a5f45;
+      --border: #d6edda;
+      --accent: #2a8f46;
+      --accent-dark: #1f6d35;
+      --shadow: 0 20px 60px rgba(34, 72, 30, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(180deg, #effbea 0%, #f7fcf6 100%);
+      color: var(--text);
+    }
+
+    main {
+      max-width: 900px;
+      margin: 32px auto;
+      background: var(--surface);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 36px;
+      border: 1px solid rgba(42, 143, 70, 0.12);
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(2rem, 2.5vw, 2.6rem);
+      color: var(--accent-dark);
+    }
+
+    p.lead {
+      margin: 0 0 28px;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+
+    label {
+      display: block;
+      margin: 22px 0 10px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      color: var(--text);
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: #f8fff8;
+      color: var(--text);
+      font-size: 0.98rem;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(42, 143, 70, 0.12);
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 26px;
+      background: var(--accent);
+      color: white;
+      padding: 16px 24px;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 700;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background: var(--accent-dark);
+      transform: translateY(-1px);
+    }
+
+    .results {
+      margin-top: 32px;
+    }
+
+    .recommendation {
+      border: 1px solid var(--border);
+      background: var(--surface-strong);
+      border-radius: 18px;
+      padding: 22px;
+      margin-bottom: 18px;
+    }
+
+    .recommendation:last-child {
+      margin-bottom: 0;
+    }
+
+    .recommendation-title {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin: 0 0 10px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--accent-dark);
+    }
+
+    .recommendation-meta {
+      margin: 0 0 10px;
+      color: var(--text-muted);
+      font-size: 0.96rem;
+      line-height: 1.5;
+    }
+
+    .recommendation-reason {
+      margin: 0;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .score {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .error {
+      color: #16492a;
+      background: #def7e0;
+      border: 1px solid #b8e0bf;
+      padding: 16px;
+      border-radius: 14px;
+    }
+
+    .hint {
+      margin-top: 6px;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 700px) {
+      main {
+        margin: 16px;
+        padding: 24px;
+      }
+
+      .recommendation-title {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Product Recommendation Agent</h1>
+    <p>Enter preferences and get recommendations from the Python backend.</p>
+    <form id="recommend-form">
+      <label for="name">Your name</label>
+      <input id="name" name="name" type="text" placeholder="Amit Sharma" />
+
+      <label for="categories">Preferred category</label>
+      <select id="categories" name="preferred_categories">
+        <option value="">Select a category</option>
+        <option value="Outdoor">Outdoor</option>
+        <option value="Electronics">Electronics</option>
+        <option value="Fitness">Fitness</option>
+        <option value="Fashion">Fashion</option>
+        <option value="Beauty">Beauty</option>
+        <option value="Home & Kitchen">Home & Kitchen</option>
+        <option value="Books">Books</option>
+        <option value="Office">Office</option>
+      </select>
+
+      <label for="tags">Interest</label>
+      <select id="tags" name="preferred_tags">
+        <option value="">Select an interest</option>
+        <option value="eco-friendly">eco-friendly</option>
+        <option value="sustainable">sustainable</option>
+        <option value="outdoor">outdoor</option>
+        <option value="fitness">fitness</option>
+        <option value="health">health</option>
+        <option value="tech">tech</option>
+        <option value="gadget">gadget</option>
+        <option value="vegan">vegan</option>
+        <option value="cruelty-free">cruelty-free</option>
+      </select>
+
+      <label for="disliked">Disliked tag</label>
+      <select id="disliked" name="disliked_tags">
+        <option value="">Select a dislike</option>
+        <option value="leather">leather</option>
+        <option value="noisy">noisy</option>
+        <option value="plastic">plastic</option>
+        <option value="expensive">expensive</option>
+        <option value="synthetic">synthetic</option>
+      </select>
+
+      <label for="budget">Budget max ($)</label>
+      <select id="budget" name="budget_max">
+        <option value="">No limit</option>
+        <option value="30">30</option>
+        <option value="50">50</option>
+        <option value="80">80</option>
+        <option value="100">100</option>
+        <option value="150">150</option>
+        <option value="200">200</option>
+        <option value="250">250</option>
+      </select>
+
+      <button type="submit">Get recommendations</button>
+    </form>
+
+    <div id="feedback" class="results"></div>
+  </main>
+
+  <script>
+    const API_URL = window.location.protocol === 'file:' ? 'http://127.0.0.1:8000/api/recommend' : '/api/recommend';
+    const form = document.getElementById('recommend-form');
+    const feedback = document.getElementById('feedback');
+
+    function getSelectedValue(id) {
+      const select = document.getElementById(id);
+      return select.value ? [select.value] : [];
+    }
+
+    function formatFetchError(error) {
+      if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+        return 'Could not reach the recommendation backend. Start the Python server and open this page through it, or use the page served from http://127.0.0.1:8000/.';
+      }
+      return error.message;
+    }
+
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      feedback.innerHTML = '<p>Loading recommendations…</p>';
+
+      const payload = {
+        name: document.getElementById('name').value.trim() || 'Guest',
+        preferred_categories: getSelectedValue('categories'),
+        preferred_tags: getSelectedValue('tags'),
+        disliked_tags: getSelectedValue('disliked'),
+        budget_max: document.getElementById('budget').value ? Number(document.getElementById('budget').value) : null,
+      };
+
+      try {
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          mode: 'cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        if (!response.ok) {
+          throw new Error('Server returned ' + response.status);
+        }
+        const data = await response.json();
+        if (!data.recommendations || data.recommendations.length === 0) {
+          feedback.innerHTML = '<p>No recommendations found. Try different preferences.</p>';
+          return;
+        }
+
+        feedback.innerHTML = data.recommendations.map((item, index) => `
+          <div class="recommendation">
+            <div class="recommendation-title">
+              <span>${index + 1}. ${item.name}</span>
+              <span class="score">(${Math.round(item.score * 100)}% match)</span>
+            </div>
+            <div class="recommendation-meta">${item.category} · $${item.price.toFixed(2)}</div>
+            <p class="recommendation-reason">${item.reason}</p>
+          </div>
+        `).join('');
+      } catch (error) {
+        feedback.innerHTML = `<div class="error">${formatFetchError(error)}</div>`;
+      }
+    });
+  </script>
+</body>
+</html>

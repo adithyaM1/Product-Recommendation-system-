@@ -1,0 +1,42 @@
+[
+  {
+    "id": "user_001",
+    "name": "Amit Sharma",
+    "preferred_categories": ["Outdoor", "Electronics"],
+    "preferred_tags": ["eco-friendly", "sustainable", "outdoor"],
+    "disliked_tags": [],
+    "budget_max": 100,
+    "purchase_history": [],
+    "_note": "COLD START: brand-new user, no purchase history. Recommendations rely entirely on stated preferences."
+  },
+  {
+    "id": "user_002",
+    "name": "Priya Verma",
+    "preferred_categories": ["Fitness"],
+    "preferred_tags": ["fitness", "health"],
+    "disliked_tags": [],
+    "budget_max": 200,
+    "purchase_history": ["p007", "p008"],
+    "_note": "RETURNING USER: has bought running shoes and resistance bands. History is blended with stated preferences."
+  },
+  {
+    "id": "user_003",
+    "name": "Rahul Mehta",
+    "preferred_categories": ["Electronics"],
+    "preferred_tags": ["tech", "gadget", "electronics"],
+    "disliked_tags": [],
+    "budget_max": 250,
+    "purchase_history": ["p012"],
+    "_note": "HIGH BUDGET TECH USER: already owns a mechanical keyboard, open to premium electronics."
+  },
+  {
+    "id": "user_004",
+    "name": "Sneha Iyer",
+    "preferred_categories": ["Fashion", "Beauty"],
+    "preferred_tags": ["vegan", "cruelty-free", "sustainable"],
+    "disliked_tags": ["leather"],
+    "budget_max": 80,
+    "purchase_history": [],
+    "_note": "COLD START + HARD FILTER: ethical shopper who must never see leather products, regardless of similarity score."
+  }
+]

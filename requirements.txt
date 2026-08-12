@@ -1,0 +1,5 @@
+# Core agent logic (recommender.py) uses only the Python standard library.
+# These two packages are OPTIONAL and only used to enhance recommendation
+# reasons with Claude. The agent runs perfectly well without them.
+anthropic>=0.34.0
+python-dotenv>=1.0.0
