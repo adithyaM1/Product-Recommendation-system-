@@ -1,10 +1,5 @@
 # Product Recommendation Agent
 
-> **One-sentence job statement:**\
-> My agent takes a user's stated preferences (and optional purchase
-> history) and produces a ranked list of product recommendations, each
-> with a plain-English reason.
-
 This is a **content-based filtering** agent: it compares a product
 catalogue against a user's stated interests (and past purchases, if any)
 using cosine similarity over weighted bag-of-words vectors. The core
@@ -13,7 +8,7 @@ logic needs **no API key and no internet connection** --- an LLM
 friendlier language.
 
 ------------------------------------------------------------------------
-## 📸 Demo Screenshots
+##  Demo Screenshots
 
 ### 1. Product Recommendation Input
 
@@ -68,25 +63,9 @@ If you skip `pip install`, the agent still works --- it just won't have
 the `anthropic` or `python-dotenv` packages, and will use rule-based
 reasons.
 
-------------------------------------------------------------------------
 
-## 2. Configure (Optional)
 
-Only needed if you want Claude to rephrase recommendation reasons in a
-friendlier voice.
-
-``` bash
-cp .env.example .env
-# Then edit .env and add your key:
-# ANTHROPIC_API_KEY=sk-ant-...
-```
-
-No API key? No problem --- the agent runs entirely offline with
-rule-based reasons.
-
-------------------------------------------------------------------------
-
-## 3. Run
+## 2. Run
 
 ``` bash
 python3 src/main.py
@@ -101,7 +80,7 @@ This will:
 
 ------------------------------------------------------------------------
 
-## 4. Run the Tests
+## 3. Run the Tests
 
 ``` bash
 python3 tests/test_recommender.py
