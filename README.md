@@ -20,8 +20,9 @@ friendlier language.
 
 The user can enter their name, preferred category, interests, disliked
 tags, and maximum budget.
-
 ![Product Recommendation Input](Product-Recommendation-system-/product input.png)
+
+
 
 ### 2. Recommendation Results
 
