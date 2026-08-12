@@ -21,14 +21,14 @@ friendlier language.
 The user can enter their name, preferred category, interests, disliked
 tags, and maximum budget.
 
-![Product Recommendation Input](screenshots/product-input.png)
+![Product Recommendation Input](product.png)
 
 ### 2. Recommendation Results
 
 The agent returns a ranked list of products with match scores, prices,
 and plain-English explanations.
 
-![Recommendation Results](screenshots/recommendations-output.png)
+![Recommendation Results](recommendtion .png)
 
 ------------------------------------------------------------------------
 
