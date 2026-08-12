@@ -19,7 +19,7 @@ friendlier language.
 
 The user can enter their name, preferred category, interests, disliked tags, and maximum budget.
 
-<img src="product-input.png" alt="Product Recommendation Input" width="800">
+<img src="product input.png" alt="Product Recommendation Input" width="800">
 
 ### 2. Recommendation Results
 
