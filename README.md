@@ -13,24 +13,19 @@ logic needs **no API key and no internet connection** --- an LLM
 friendlier language.
 
 ------------------------------------------------------------------------
-
-## Demo Screenshots
+## 📸 Demo Screenshots
 
 ### 1. Product Recommendation Input
 
-The user can enter their name, preferred category, interests, disliked
-tags, and maximum budget.
-![Product Recommendation Input](Product-Recommendation-system-/product input.png)
+The user can enter their name, preferred category, interests, disliked tags, and maximum budget.
 
-
+<img src="product-input.png" alt="Product Recommendation Input" width="800">
 
 ### 2. Recommendation Results
 
-The agent returns a ranked list of products with match scores, prices,
-and plain-English explanations.
+The agent returns a ranked list of products with match scores, prices, and plain-English explanations.
 
-![Recommendation Results](screenshots/recommendations-output.png)
-
+<img src="recommendation-results.png" alt="Recommendation Results" width="800">
 ------------------------------------------------------------------------
 
 ## Project Structure
