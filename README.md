@@ -1,111 +1,197 @@
-# Product Recommendation System
+# Product Recommendation Agent
 
-**One-sentence job statement:**
-> My agent takes a user's stated preferences (and optional purchase history) and produces a ranked list of product recommendations, each with a plain-English reason.
+> **One-sentence job statement:**\
+> My agent takes a user's stated preferences (and optional purchase
+> history) and produces a ranked list of product recommendations, each
+> with a plain-English reason.
 
-This is a **content-based filtering** agent: it compares a product catalogue against a user's stated interests (and past purchases, if any) using cosine similarity over weighted bag-of-words vectors. The core logic needs **no API key and no internet connection** — an LLM (Claude) is used only as an *optional* layer to rephrase the reasons in friendlier language.
+This is a **content-based filtering** agent: it compares a product
+catalogue against a user's stated interests (and past purchases, if any)
+using cosine similarity over weighted bag-of-words vectors. The core
+logic needs **no API key and no internet connection** --- an LLM
+(Claude) is used only as an *optional* layer to rephrase the reasons in
+friendlier language.
 
----
+------------------------------------------------------------------------
+
+## Demo Screenshots
+
+### 1. Product Recommendation Input
+
+The user can enter their name, preferred category, interests, disliked
+tags, and maximum budget.
+
+![Product Recommendation Input](screenshots/product-input.png)
+
+### 2. Recommendation Results
+
+The agent returns a ranked list of products with match scores, prices,
+and plain-English explanations.
+
+![Recommendation Results](screenshots/recommendations-output.png)
+
+------------------------------------------------------------------------
 
 ## Project Structure
 
-```
+``` text
 product-recommendation-agent/
-├── README.md                 # this file
-├── requirements.txt          # optional dependencies (anthropic, python-dotenv)
-├── .env.example               # copy to .env to enable the optional LLM layer
+├── README.md
+├── requirements.txt
+├── .env.example
 ├── data/
-│   ├── products.json          # 22-item product catalogue
-│   └── users.json              # 4 sample user profiles
+│   ├── products.json
+│   └── users.json
 ├── src/
-│   ├── recommender.py          # core content-based filtering logic (no dependencies)
-│   ├── llm_explainer.py        # optional Claude-powered reason rewriting
-│   └── main.py                 # CLI entry point / demo runner
+│   ├── recommender.py
+│   ├── llm_explainer.py
+│   └── main.py
 ├── tests/
-│   └── test_recommender.py     # assert-based tests, no pytest required
-└── outputs/
-    └── sample_output.txt       # generated automatically each time you run main.py
+│   └── test_recommender.py
+├── outputs/
+│   └── sample_output.txt
+└── screenshots/
+    ├── product-input.png
+    └── recommendations-output.png
 ```
 
----
+------------------------------------------------------------------------
 
 ## 1. Install
 
 Requires Python 3.9+.
 
-```bash
+``` bash
 cd product-recommendation-agent
 python3 -m venv venv
 source venv/bin/activate        # Windows: venv\Scripts\activate
-pip install -r requirements.txt  # optional, only needed for the LLM layer
+pip install -r requirements.txt
 ```
 
-If you skip `pip install`, the agent still works — it just won't have the `anthropic` or `python-dotenv` packages, and will silently use rule-based reasons.
+If you skip `pip install`, the agent still works --- it just won't have
+the `anthropic` or `python-dotenv` packages, and will use rule-based
+reasons.
 
-## 2. Configure (optional)
+------------------------------------------------------------------------
 
-Only needed if you want Claude to rephrase recommendation reasons in a friendlier voice.
+## 2. Configure (Optional)
 
-```bash
+Only needed if you want Claude to rephrase recommendation reasons in a
+friendlier voice.
+
+``` bash
 cp .env.example .env
-# then edit .env and paste in your key:
+# Then edit .env and add your key:
 # ANTHROPIC_API_KEY=sk-ant-...
 ```
 
-Get a key at https://console.anthropic.com/. No key? No problem — leave `.env` alone and the agent runs entirely offline with rule-based reasons.
+No API key? No problem --- the agent runs entirely offline with
+rule-based reasons.
+
+------------------------------------------------------------------------
 
 ## 3. Run
 
-```bash
+``` bash
 python3 src/main.py
 ```
 
 This will:
-1. Load the product catalogue and all 4 sample user profiles.
-2. Print top-5 recommendations (with reasons) for each user.
-3. Save the full output to `outputs/sample_output.txt`.
-4. Ask if you'd like to enter your own preferences interactively (type `y` to try it, `n` to exit).
 
-## 4. Run the tests
+1.  Load the product catalogue and all 4 sample user profiles.
+2.  Print top-5 recommendations with reasons for each user.
+3.  Save the full output to `outputs/sample_output.txt`.
+4.  Ask whether you'd like to enter your own preferences interactively.
 
-```bash
+------------------------------------------------------------------------
+
+## 4. Run the Tests
+
+``` bash
 python3 tests/test_recommender.py
 ```
 
-All four tests should print `PASS` — they check cold-start ranking, disliked-tag filtering, purchase-history exclusion, and budget filtering.
+The tests check:
 
----
+-   Cold-start ranking
+-   Disliked-tag filtering
+-   Purchase-history exclusion
+-   Budget filtering
+
+------------------------------------------------------------------------
 
 ## Design & Approach
 
-### Similarity method
-Each product and user is converted into a **weighted bag-of-words vector** (a word-count dictionary), then compared using **cosine similarity**:
+### Similarity Method
 
-- Product vectors are built from: category (×3 weight), tags (×2 weight each), and tokenized description (×1 weight). Category and tags are stronger, more curated signals than free-text description, so they're weighted higher.
-- User vectors are built the same way from `preferred_categories` and `preferred_tags`.
-- **Returning users** (non-empty `purchase_history`) get their vector blended: 60% average of their purchased products' vectors + 40% stated preferences. This lets past behavior dominate while still respecting newly stated interests.
-- **Cold-start users** (empty `purchase_history`) use their stated-preference vector alone — there's no history to blend in, so the agent leans entirely on what they say they want. This is the graceful cold-start handling required by the brief: no purchases needed to get relevant results.
+Each product and user is converted into a **weighted bag-of-words
+vector** and compared using **cosine similarity**.
 
-### Filtering vs. ranking
-Two things are **hard filters** (never shown, regardless of similarity score):
-- Products carrying any tag in `disliked_tags`.
-- Products already in `purchase_history`.
-- Products priced more than 15% over `budget_max` (a small buffer avoids losing a near-perfect match over a few dollars, while still respecting the budget in spirit).
+-   Product vectors use:
+    -   Category ×3
+    -   Tags ×2
+    -   Tokenized description ×1
+-   User vectors are built from preferred categories and preferred tags.
+-   Returning users get a blended vector:
+    -   60% purchased-product vectors
+    -   40% stated preferences
+-   Cold-start users with no purchase history use their stated
+    preferences alone.
 
-Everything else is **ranked**, not filtered: cosine similarity score, plus a small `+0.05` bonus for an exact category match and `+0.03` for comfortably fitting the budget.
+This provides a simple and explainable recommendation method without
+requiring an external database or API.
 
-### Why not TF-IDF or a vector database?
-A full TF-IDF/IDF weighting or embeddings-based approach would scale better to thousands of products, but for a 22-item demo catalogue, plain term-frequency vectors are simpler, fully explainable line-by-line, and require zero external dependencies — which matters for a reviewer running this from a README in a few minutes. See Tradeoffs below for what I'd change at scale.
+### Filtering vs. Ranking
 
-### Where the LLM fits in
-The brief's suggested architecture treats an LLM API as the agent's "brain." Here, the deterministic similarity engine is the brain for *ranking* (this needs to be reproducible and explainable, not creative). The LLM is used only for the *last-mile* task it's actually good at: turning a correct-but-dry rule-based reason into one natural sentence. If `ANTHROPIC_API_KEY` isn't set, or the API call fails for any reason (bad key, no network, rate limit), `llm_explainer.py` catches the exception and silently falls back to the rule-based reason — the agent never crashes or hangs because of the network.
+The following are hard filters:
 
----
+-   Products containing any `disliked_tags`
+-   Products already present in `purchase_history`
+-   Products priced more than 15% above `budget_max`
 
-## Sample Input & Output
+Remaining products are ranked using:
 
-Input (`data/users.json`, one entry):
-```json
+-   Cosine similarity
+-   `+0.05` bonus for an exact category match
+-   `+0.03` bonus for comfortably fitting the budget
+
+------------------------------------------------------------------------
+
+## Why Not TF-IDF or a Vector Database?
+
+For a 22-item demonstration catalogue, plain term-frequency vectors are:
+
+-   Easy to understand
+-   Fully explainable
+-   Dependency-free
+-   Fast to run
+-   Easy for a reviewer to test
+
+For a much larger catalogue, the system could be upgraded to TF-IDF,
+embeddings, or a vector database.
+
+------------------------------------------------------------------------
+
+## Where the LLM Fits In
+
+The deterministic similarity engine handles **ranking**, because
+recommendation scores should be reproducible and testable.
+
+Claude is used only for the final explanation layer:
+
+> Deterministic engine → ranked products → optional Claude explanation
+
+If the API key is missing, the API call fails, the network is
+unavailable, or the API is rate-limited, the system falls back to
+rule-based explanations instead of crashing.
+
+------------------------------------------------------------------------
+
+## Sample Input
+
+Example user profile:
+
+``` json
 {
   "id": "user_004",
   "name": "Sneha Iyer",
@@ -117,43 +203,204 @@ Input (`data/users.json`, one entry):
 }
 ```
 
-Output (from `outputs/sample_output.txt`, generated by running `main.py`):
-```
+------------------------------------------------------------------------
+
+## Sample Output
+
+``` text
 Recommendations for Sneha Iyer  (user_id=user_004)
 COLD START (no purchase history)
 ========================================================================
 1. Minimalist Leather-Free Sneakers ($69.99) [Fashion]
    -> Recommended (72.7% match): matches your preferred category 'Fashion';
       shares your interests: sustainable, vegan; fits within your $80 budget.
+
 2. Natural Skincare Gift Set ($49.99) [Beauty]
    -> Recommended (60.9% match): matches your preferred category 'Beauty';
       shares your interests: cruelty-free, vegan; fits within your $80 budget.
+
 3. Vegan Leather Wallet ($29.99) [Fashion]
    -> Recommended (47.9% match): matches your preferred category 'Fashion';
       shares your interests: vegan; fits within your $80 budget.
 ```
 
-Notice the catalogue also contains a plain "Leather Wallet"-style item with the `leather` tag — it never appears here, because `disliked_tags` is a hard filter, not just a scoring penalty. Full output for all 4 sample users is in `outputs/sample_output.txt` after you run the agent once.
+The catalogue also contains products carrying the `leather` tag. Because
+`leather` is listed under `disliked_tags`, those products are removed by
+the hard-filtering step and do not appear in the recommendations.
 
----
+------------------------------------------------------------------------
+
+## Key Features
+
+-   Content-based product recommendation
+-   Cosine similarity scoring
+-   Weighted product and user vectors
+-   Cold-start recommendation support
+-   Purchase-history personalization
+-   Disliked-tag hard filtering
+-   Budget-aware filtering
+-   Explainable recommendation reasons
+-   Optional Claude integration
+-   Offline fallback without an API key
+-   Interactive user preference input
+-   Automated tests
+-   JSON-based product and user data
+
+------------------------------------------------------------------------
 
 ## Tradeoffs & Limitations
 
-**What I optimized for:** an agent a reviewer can run in under 2 minutes with zero API keys, fully explainable line-by-line, that still demonstrates a real similarity method and graceful cold-start behavior.
+### 1. Basic Term Frequency
 
-**Known limitations and what I'd improve with more time:**
-- **Vectorization is basic term-frequency, not TF-IDF.** Common words (e.g. "eco-friendly" appearing on many products) aren't down-weighted the way IDF would. At catalogue sizes beyond a few hundred items, I'd switch to `scikit-learn`'s `TfidfVectorizer` or embeddings (e.g. `sentence-transformers`) for better semantic matching (so "climbing gear" and "hiking equipment" would match even without exact word overlap).
-- **No collaborative filtering.** Recommendations only look at a user's own stated interests/history, never "users like you also bought." Adding that would need more user-interaction data than a 4-profile demo has.
-- **Cold-start relies entirely on explicit preferences.** A production system would also want implicit signals (browsing behavior, demographic priors) to recommend something reasonable even for a user who states nothing at all.
-- **Budget buffer (15%) is a fixed heuristic.** A/B testing against real user behavior would tell us whether that's the right amount of flexibility, or whether it should vary by price bracket.
-- **The optional LLM layer only rewrites text, it doesn't re-rank.** A more ambitious version could let the LLM re-rank or explain trade-offs between top candidates (e.g. "cheaper but fewer features" vs "pricier but perfect match") — I kept ranking deterministic on purpose so results are reproducible and testable.
-- **No persistence layer.** User profiles and the catalogue are static JSON files. A real system would use SQLite (or a proper DB) so purchase history updates automatically as users buy things.
+The current implementation uses term-frequency vectors rather than
+TF-IDF.
 
----
+**Future improvement:** Use `TfidfVectorizer` or sentence embeddings for
+better semantic matching.
 
-## Every part of this code, explained
+### 2. No Collaborative Filtering
 
-- `src/recommender.py` — the entire recommendation engine: `tokenize()`, `Product.feature_vector()`, `UserProfile.stated_preference_vector()`, `cosine_similarity()`, and the `Recommender` class (`build_user_vector`, `recommend`, `_explain`). No dependencies beyond Python's standard library (`math`, `re`, `collections.Counter`).
-- `src/llm_explainer.py` — one function, `enhance_reason_with_llm()`, that calls the Anthropic API and falls back safely on any failure.
-- `src/main.py` — loads `data/*.json` into the dataclasses above, runs `recommend()` for each sample user, prints and saves results, and offers an interactive prompt.
-- `tests/test_recommender.py` — four focused tests proving cold-start ranking, disliked-tag hard-filtering, purchase-history exclusion, and budget filtering all work as designed.
+The current system only considers the individual user's preferences and
+history.
+
+**Future improvement:** Add collaborative filtering so users can benefit
+from patterns such as "users like you also bought."
+
+### 3. Cold Start
+
+Cold-start users depend on explicit preferences.
+
+**Future improvement:** Use browsing activity, clicks, product
+popularity, or other implicit signals.
+
+### 4. Fixed Budget Buffer
+
+The 15% budget buffer is a simple heuristic.
+
+**Future improvement:** Tune this value using real user behavior or A/B
+testing.
+
+### 5. LLM Does Not Re-rank
+
+Claude only improves the explanation text.
+
+**Future improvement:** Use an LLM for deeper comparison and trade-off
+explanations while keeping the deterministic ranking as the primary
+score.
+
+### 6. No Persistent Database
+
+The project currently stores profiles and products in JSON files.
+
+**Future improvement:** Use SQLite or another database so purchase
+history can be updated automatically.
+
+------------------------------------------------------------------------
+
+## Code Overview
+
+### `src/recommender.py`
+
+Contains the main recommendation engine:
+
+-   `tokenize()`
+-   `Product.feature_vector()`
+-   `UserProfile.stated_preference_vector()`
+-   `cosine_similarity()`
+-   `Recommender.build_user_vector()`
+-   `Recommender.recommend()`
+-   `Recommender._explain()`
+
+The module uses only Python standard-library functionality such as
+`math`, `re`, and `collections.Counter`.
+
+### `src/llm_explainer.py`
+
+Contains the optional Claude integration.
+
+It rewrites deterministic recommendation reasons into friendlier
+natural-language explanations and safely falls back when the API is
+unavailable.
+
+### `src/main.py`
+
+Responsible for:
+
+-   Loading JSON data
+-   Creating product and user objects
+-   Running recommendations
+-   Printing results
+-   Saving `outputs/sample_output.txt`
+-   Running the interactive preference flow
+
+### `tests/test_recommender.py`
+
+Contains focused tests for:
+
+-   Cold-start ranking
+-   Disliked-tag filtering
+-   Purchase-history exclusion
+-   Budget filtering
+
+------------------------------------------------------------------------
+
+## Example User Flow
+
+``` text
+User preferences
+      ↓
+Preferred category
+      +
+Interests
+      +
+Disliked tags
+      +
+Maximum budget
+      ↓
+Build user preference vector
+      ↓
+Apply hard filters
+      ↓
+Calculate cosine similarity
+      ↓
+Apply category + budget bonuses
+      ↓
+Sort products by score
+      ↓
+Generate recommendation reasons
+      ↓
+Top product recommendations
+```
+
+------------------------------------------------------------------------
+
+## Future Improvements
+
+Possible next versions could include:
+
+1.  TF-IDF or embedding-based semantic search
+2.  Collaborative filtering
+3.  SQLite/PostgreSQL persistence
+4.  User login and profiles
+5.  Product images and richer product metadata
+6.  Feedback collection such as likes/dislikes
+7.  Recommendation history
+8.  FastAPI backend
+9.  React frontend
+10. Vector database integration
+11. LLM-powered comparison of top recommendations
+12. Deployment using Docker and a cloud platform
+
+------------------------------------------------------------------------
+
+## Conclusion
+
+This project demonstrates a practical, explainable product
+recommendation agent that can operate without an API key or internet
+connection.
+
+The core recommendation engine remains deterministic and testable, while
+the optional LLM layer improves the quality of the user-facing
+explanations. This separation makes the system simple enough for a demo
+while leaving a clear path toward a production-scale recommendation
+platform.
