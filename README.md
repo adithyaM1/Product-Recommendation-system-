@@ -28,7 +28,7 @@ tags, and maximum budget.
 The agent returns a ranked list of products with match scores, prices,
 and plain-English explanations.
 
-![Recommendation Results](recommendtion .png)
+![Recommendation Results](recommendtion.png)
 
 ------------------------------------------------------------------------
 
