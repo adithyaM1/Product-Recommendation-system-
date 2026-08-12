@@ -25,7 +25,7 @@ The user can enter their name, preferred category, interests, disliked tags, and
 
 The agent returns a ranked list of products with match scores, prices, and plain-English explanations.
 
-<img src="recommendation-results.png" alt="Recommendation Results" width="800">
+<img src="recommendtion .png" alt="Recommendation Results" width="800">
 ------------------------------------------------------------------------
 
 ## Project Structure
